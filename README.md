@@ -60,14 +60,14 @@ Abrir:
 ## Configuración por variables de entorno
 La app usa estas variables (en EC2 es recomendable exportarlas en `~/.bashrc` o en un `.env` **no versionado**):
 
-- `AWS_REGION` (ej. `eu-west-1`)
+- `AWS_REGION` (ej. `us-west-1`)
 - `S3_BUCKET` (nombre del bucket)
 - `S3_KEY` (ruta del objeto, ej. `data/sensores/iabdXX_sensores.json`)
 
 Ejemplo:
 
 ```bash
-export AWS_REGION=eu-west-1
+export AWS_REGION=us-west-1
 export S3_BUCKET=mi-bucket-privado
 export S3_KEY=data/sensores/iabd01_sensores.json
 ```

@@ -4,8 +4,12 @@ import pandas as pd
 import streamlit as st
 import plotly.express as px
 
-from app.services.s3_loader import load_json_from_s3
-from app.services.preprocessing import to_dataframe, ensure_columns, parse_time
+try:
+    from app.services.s3_loader import load_json_from_s3
+    from app.services.preprocessing import to_dataframe, ensure_columns, parse_time
+except ModuleNotFoundError:
+    from services.s3_loader import load_json_from_s3
+    from services.preprocessing import to_dataframe, ensure_columns, parse_time
 
 st.set_page_config(page_title="RA2 · IoT Dashboard", layout="wide")
 

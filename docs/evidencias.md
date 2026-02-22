@@ -4,11 +4,11 @@
 > Indica si has usado **Variante A (IAM Role)** o **Variante B (aws configure)**.
 
 ## 0) Identificación
-- Alumno/a:
-- Grupo:
-- Variante usada (A/B):
-- Región AWS:
-- Bucket S3:
+- Alumno/a: Alberto Bringas Maza
+- Grupo: IABD
+- Variante usada (A/B): B
+- Región AWS: us-east-1
+- Bucket S3: ra2-sbd-bertobm-20260221-8473
 
 ---
 

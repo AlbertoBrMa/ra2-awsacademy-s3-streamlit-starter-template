@@ -10,7 +10,7 @@ from app.services.preprocessing import to_dataframe, ensure_columns, parse_time
 st.set_page_config(page_title="RA2 · IoT Dashboard", layout="wide")
 
 st.title("RA2 · Dashboard IoT (S3 privado + Streamlit)")
-st.caption("Plantilla *starter*: completa los TODOs para obtener el dashboard final.")
+st.caption("Dashboard IoT con carga desde S3, filtros, tabla, gráficas y mapa.")
 
 # --- Config ---
 AWS_REGION = os.getenv("AWS_REGION", "")
@@ -45,8 +45,11 @@ def load_data(bucket: str, key: str, region: str) -> pd.DataFrame:
 
     NOTA: No incluyas credenciales en el código. Usa IAM Role (Variante A) o `aws configure` (Variante B).
     """
-    # --- TODO: implementa ---
-    raise NotImplementedError("Implementa load_data()")
+    raw = load_json_from_s3(bucket, key, region)
+    df = to_dataframe(raw)
+    df = ensure_columns(df)
+    df = parse_time(df)
+    return df
 
 
 def apply_filters(df: pd.DataFrame, sensor_state: str, temp_min: float, temp_max: float) -> pd.DataFrame:
@@ -56,8 +59,13 @@ def apply_filters(df: pd.DataFrame, sensor_state: str, temp_min: float, temp_max
     - Si sensor_state != '(todos)', filtra por sensor_state (case-insensitive).
     - Filtra por temperatura en el rango [temp_min, temp_max].
     """
-    # --- TODO: implementa ---
-    raise NotImplementedError("Implementa apply_filters()")
+    out = df.copy()
+
+    if sensor_state != "(todos)":
+        out = out[out["sensor_state"].astype(str).str.upper() == sensor_state.upper()]
+
+    out = out[(out["temperature_c"] >= temp_min) & (out["temperature_c"] <= temp_max)]
+    return out
 
 
 def plot_temperature(df: pd.DataFrame):
@@ -68,8 +76,13 @@ def plot_temperature(df: pd.DataFrame):
     - Eje Y: temperature_c
     - Color: sensor_id (recomendado)
     """
-    # --- TODO: implementa ---
-    raise NotImplementedError("Implementa plot_temperature()")
+    return px.line(
+        df.sort_values("timestamp"),
+        x="timestamp",
+        y="temperature_c",
+        color="sensor_id",
+        markers=True,
+    )
 
 
 def plot_co2(df: pd.DataFrame):
@@ -79,8 +92,12 @@ def plot_co2(df: pd.DataFrame):
     - Agrupa por sensor_id
     - Métrica: media (recomendado) o suma de co2_ppm
     """
-    # --- TODO: implementa ---
-    raise NotImplementedError("Implementa plot_co2()")
+    agg = (
+        df.groupby("sensor_id", as_index=False)["co2_ppm"]
+        .mean()
+        .sort_values("co2_ppm", ascending=False)
+    )
+    return px.bar(agg, x="sensor_id", y="co2_ppm")
 
 
 def render_map(df: pd.DataFrame):
@@ -90,8 +107,8 @@ def render_map(df: pd.DataFrame):
     - Quita filas sin lat/lon
     - Llama a st.map(...)
     """
-    # --- TODO: implementa ---
-    raise NotImplementedError("Implementa render_map()")
+    map_df = df.dropna(subset=["lat", "lon"])[["lat", "lon"]]
+    st.map(map_df, latitude="lat", longitude="lon")
 
 
 # --- Control recarga cache ---

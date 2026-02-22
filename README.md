@@ -81,7 +81,7 @@ export S3_KEY=data/sensores/iabd01_sensores.json
 - `scripts/` → setup EC2 y arranque en segundo plano
 - `docs/` → enunciado, entrega, evidencias, rúbrica
 - `notebooks/` → aquí irá vuestro notebook/script de subida a S3
-
+- `img/` → aquí van las capturas para evidencias
 ---
 
 ## Licencia

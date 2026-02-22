@@ -9,8 +9,7 @@ Coloca aquí el notebook (Colab/Local) o script que:
 ## Notebook listo para usar
 
 Se incluye `notebooks/generate_upload_iot.ipynb`, que:
-1) genera datos IoT sintéticos con el esquema solicitado, y
-2) los sube a S3.
+1) genera datos IoT sintéticos con el esquema solicitado, y los sube a S3.
 
 Pasos:
 1. Abre `notebooks/generate_upload_iot.ipynb`.
@@ -18,8 +17,5 @@ Pasos:
 3. Ejecuta todas las celdas.
 
 Salida esperada:
-- archivo local `iabd01_sensores.json`
-- objeto en `s3://<bucket>/data/sensores/iabd01_sensores.json`
-
-Valor que debes usar en la app/entrega:
-- `S3_KEY=data/sensores/iabd01_sensores.json`
+- archivo local `iabd13_sensores.json`
+- objeto en `s3://<bucket>/data/sensores/iabd13_sensores.json`

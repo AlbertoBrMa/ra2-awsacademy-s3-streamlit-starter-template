@@ -25,7 +25,11 @@
 ## 2) Notebook / Script de subida
 - [ ] Captura de la ejecución del notebook/script subiendo a S3
 - [ ] Enlace o ruta del archivo en el repo (`notebooks/...`)
+Ruta en el repositorio:
+    `notebooks/generate_upload_iot.ipynb`
 
+Enlace directo en GitHub:
+    https://github.com/TU_USUARIO/ra2-awsacademy-s3-streamlit-starter-template/blob/main/notebooks/generate_upload_iot.ipynb
 ---
 
 ## 3) EC2 y red
